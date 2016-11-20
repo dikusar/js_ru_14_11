@@ -56,8 +56,6 @@ class Article extends Component {
         }else {
             return null
         }
-
-        // return state.isOpen ? <div> <p>{article.text}</p><button onClick={this.showHideComments}>{buttonText}</button> </div> : null
     }
  
     renderComments(state, comments) {
