@@ -7,6 +7,7 @@ class Article extends Component {
         super()
         this.state = {
             isOpen: false,
+            //Слишком перегруженный компонент выходит, Сделай еще CommentList и вынеси этот стейт туда
             isCommentsShow: false,
             obj: { foo: 'bar' }
         }
