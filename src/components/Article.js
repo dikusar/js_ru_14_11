@@ -1,41 +1,34 @@
-import React, { Component } from 'react'
-import CommentsList from './CommentsList'
+import React, { Component, PropTypes } from 'react'
+import CommentList from './CommentList'
 
-class Article extends Component {
-
-    constructor() {
-        super()
-        this.state = {
-            isOpen: false,
-            obj: { foo: 'bar' }
-        }
-    }
-
-    render() {
-        const { article } = this.props
-        const { text, title } = article
-        // Article's content
-        const body = this.state.isOpen ? <div><p>{text}</p> <CommentsList comments={article.comments} /></div> : null
-
-        return (
-            <section>
-                <h3 onClick = {this.showHideBody}>
-                    {title}
-                </h3>
-
-                {body}
-
-            </section>
-        )
-    }
-
-    // Actions
-    showHideBody = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    }
-
+function Article(props) {
+    const { article, toggleOpen } = props
+    return (
+        <section>
+            <h3 onClick = {toggleOpen}>{article.title}</h3>
+            {getBody(props)}
+        </section>
+    )
 }
+
+Article.propTypes = {
+    article: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        comments: PropTypes.array,
+        text: PropTypes.string
+    }).isRequired
+}
+
+function getBody(props) {
+    const { article, isOpen } = props
+    if (!isOpen) return null
+    return (
+        <div>
+            <p>{article.text}</p>
+            <CommentList comments = {article.comments} />
+        </div>
+    )
+}
+
 
 export default Article
