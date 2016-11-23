@@ -26,7 +26,8 @@ Article.propTypes = {
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
         comments: PropTypes.array,
-        text: PropTypes.string
+        text: PropTypes.string,
+        isOpen: PropTypes.bool.isRequired
     }).isRequired,
     isOpen: PropTypes.bool.isRequired,
     accordion: PropTypes.func.isRequired

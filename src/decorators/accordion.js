@@ -14,9 +14,16 @@ export default (Component) => class accordionDec extends React.Component {
                 />
     }
 
-    accordion = id => ev => {
-        this.setState({
-            openArticleId: id
-        })
+    accordion = (id) => ev => {
+        const openArticleId = this.state.openArticleId
+        if (openArticleId && openArticleId == id) {
+            this.setState({
+                openArticleId: null
+            })    
+        }else {
+            this.setState({
+                openArticleId: id
+            })
+        }
     }
 }
