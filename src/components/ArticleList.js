@@ -12,7 +12,7 @@ function ArticleList(props) {
 }
 
 function getArticleItems(props) {
-    const { articles, accordion, openArticleId, isOpen } = props
+    const { articles, accordion, openArticleId } = props
 
     const articleItems = articles.map(article => (
         <li key = {article.id}>

@@ -1,10 +1,9 @@
 import React from 'react'
 
-export default (Component) => class accordionDecorator extends React.Component {
+export default (Component) => class accordionDec extends React.Component {
     
     state = {
-        openArticleId: null,
-        isOpen: false
+        openArticleId: null
     }
 
     render() {
@@ -17,8 +16,7 @@ export default (Component) => class accordionDecorator extends React.Component {
 
     accordion = id => ev => {
         this.setState({
-            openArticleId: id,
-            isOpen: !this.state.isOpen
+            openArticleId: id
         })
     }
 }
