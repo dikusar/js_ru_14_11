@@ -1,20 +1,18 @@
 import React, { Component }  from 'react'
 import Article from './Article'
+import accordion from '../decorators/accordion'
 
 class ArticleList extends Component {
-    state = {
-        openArticleId: null
-    }
 
     render() {
-        const { articles } = this.props
+        const { articles, accordion, openArticleId } = this.props
 
         const articleItems = articles.map(article => (
             <li key = {article.id}>
                 <Article
                     article = {article}
-                    isOpen = {article.id == this.state.openArticleId}
-                    toggleOpen = {this.openArticle(article.id)}
+                    isOpen = {article.id == openArticleId}
+                    toggleOpen = {accordion(article.id)}
                 />
             </li>
         ))
@@ -25,12 +23,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
-    openArticle = id => ev => {
-        this.setState({
-            openArticleId: id
-        })
-    }
 }
 
-export default ArticleList
+export default accordion(ArticleList)

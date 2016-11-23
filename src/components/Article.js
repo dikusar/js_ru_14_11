@@ -5,7 +5,7 @@ function Article(props) {
     const { article, toggleOpen } = props
     return (
         <section>
-            <h3 onClick = {toggleOpen}>{article.title}</h3>
+            <h3 onClick = {toggleOpen}> {article.title} </h3>
             {getBody(props)}
         </section>
     )
