@@ -1,29 +1,33 @@
 import React from 'react'
 
-export default (Component) => class accordionDec extends React.Component {
+export default (Component) => class AccordionDecorator extends React.Component {
     
     state = {
-        openArticleId: null
+        openItemId: null
+    }
+
+    componentWillReceiveProps() {
+        //console.log('---', 'accordion receiving props')
+    }
+
+    componentWillUpdate() {
+        ///console.log('---', 'accordion will update')
     }
 
     render() {
         return <Component 
                     {...this.props}
                     {...this.state}
-                    accordion={this.accordion}
+                    isOpen={this.isOpen}
+                    toggleOpenItem={this.toggleOpenItem}
                 />
     }
 
-    accordion = (id) => ev => {
-        const openArticleId = this.state.openArticleId
-        if (openArticleId && openArticleId == id) {
-            this.setState({
-                openArticleId: null
-            })    
-        }else {
-            this.setState({
-                openArticleId: id
-            })
-        }
+    isOpen = id => this.state.openItemId == id
+
+    toggleOpenItem = id => ev => {
+        this.setState({
+            openItemId: this.state.openItemId == id ? null : id
+        }) 
     }
 }
