@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 // Addons
 import Select from 'react-select'
 import DateRange from './DateRange'
-import Counter from './Counter'
 import 'react-select/dist/react-select.css'
 
 // Components
@@ -25,7 +24,6 @@ class App extends Component {
         }))
         return (
             <div>
-                <Counter />
                 <Chart />
                 <Select
                     placeholder='Select the article'
