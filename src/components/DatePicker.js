@@ -7,6 +7,7 @@ import "react-day-picker/lib/style.css"
 export class DatePicker extends Component {
 
 	state = {
+		//надо было промежуток дат сделать
         selectedDay: null
     }
 
