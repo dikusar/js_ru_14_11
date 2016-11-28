@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 // Addons
 import Select from 'react-select'
+import DateRange from './DateRange'
 import 'react-select/dist/react-select.css'
 
 // Components
 import ArticleList from './ArticleList'
 import Chart from './Chart'
-import DatePicker from './DatePicker'
-
 
 class App extends Component {
     static propTypes = {
@@ -26,7 +25,6 @@ class App extends Component {
         return (
             <div>
                 <Chart />
-                <DatePicker />
                 <Select
                     placeholder='Select the article'
                     options={ options }
@@ -34,7 +32,8 @@ class App extends Component {
                     onChange={ this.handleChange }
                     // multi={ true } 
                     />
-                <ArticleList articles={this.props.articles} />
+                <DateRange />
+               <ArticleList articles={this.props.articles} />
             </div>
         )
     }
