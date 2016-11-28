@@ -1,5 +1,6 @@
 import React from 'react'
 
+//значения полей должны жить в state
 function CommentForm() {
 	const { commentForm, input, textarea, label }=styles()
 	return (
