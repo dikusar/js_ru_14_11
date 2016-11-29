@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import ArticleList from './ArticleList'
 import Select from 'react-select'
 import Chart from './Chart'
@@ -13,7 +14,8 @@ class App extends Component {
     }
 
     render() {
-        const options = [].map(article => ({
+        const { articles }=this.props
+        const options = articles.map(article => ({
             label: article.title,
             value: article.id
         }))
@@ -31,4 +33,6 @@ class App extends Component {
     handleChange = selected => this.setState({ selected })
 }
 
-export default App
+export default connect(state => ({
+    articles: state.articles
+}) )(App)
