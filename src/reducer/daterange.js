@@ -7,6 +7,7 @@ export default (rangeState = {from: null, to: null}, action) => {
 	switch (type) {
 		case ADD_RANGE:
 			return Object.assign({}, DateUtils.addDayToRange(payload.day, rangeState))
+        break
 	}
 
 	return rangeState

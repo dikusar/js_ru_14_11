@@ -5,16 +5,18 @@ import Select from 'react-select'
 import Chart from './Chart'
 import DateRange from './DateRange'
 import Counter from './Counter'
+import { selectArticle } from '../AC/select'
+
 import 'react-select/dist/react-select.css'
 
 class App extends Component {
 
-    state = {
-        selected: null
-    }
+    // state = {
+    //     selected: null
+    // }
 
     render() {
-        const { articles }=this.props
+        const { articles, selected }=this.props
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
@@ -25,14 +27,23 @@ class App extends Component {
                 <Chart />
                 <DateRange />
                 <ArticleList />
-                <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi = {true}/>
+                <Select 
+                    options = {options}
+                    value = {selected}
+                    onChange = {this.handleChange}
+                    multi = {true}/>
             </div>
         )
     }
 
-    handleChange = selected => this.setState({ selected })
+    handleChange = selected => {
+        // this.setState({ selected })
+        const { selectArticle }=this.props
+        selectArticle(selected)
+    }
 }
 
 export default connect(state => ({
-    articles: state.articles
-}) )(App)
+    articles: state.articles,
+    selected: state.selected
+}), { selectArticle } )(App)
