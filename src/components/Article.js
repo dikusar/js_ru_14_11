@@ -24,7 +24,7 @@ class Article extends Component {
         const { article, toggleOpen } = this.props
         return (
             <section>
-                <h3 onClick = {toggleOpen}>{article.title}</h3>
+                <h3 onClick = {toggleOpen}>{article.label}</h3>
                 <a href = "#" onClick = {this.handleDeleteArticle}>delete me</a>
                 {this.getBody()}
             </section>
@@ -46,13 +46,13 @@ class Article extends Component {
     handleDeleteArticle = ev => {
         ev.preventDefault()
         const { deleteArticle, article } = this.props
-        deleteArticle(article.id)
+        deleteArticle(article.value)
     }
 }
 
 Article.propTypes = {
     article: PropTypes.shape({
-        title: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
         comments: PropTypes.array,
         text: PropTypes.string
     }).isRequired,

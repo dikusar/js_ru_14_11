@@ -4,6 +4,11 @@ import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
 
 class ArticleList extends Component {
+
+    static defaultProps = {
+        articles: []
+    }
+
     static propTypes = {
         articles: PropTypes.array.isRequired,
         //from accordion decorator
@@ -38,11 +43,11 @@ class ArticleList extends Component {
         const { articles, isOpen, toggleOpenItem } = this.props
 
         const articleItems = articles.map(article => (
-            <li key = {article.id}>
+            <li key = {article.value}>
                 <Article
                     article = {article}
-                    isOpen = {isOpen(article.id)}
-                    toggleOpen = {toggleOpenItem(article.id)}
+                    isOpen = {isOpen(article.value)}
+                    toggleOpen = {toggleOpenItem(article.value)}
                 />
             </li>
         ))
@@ -56,5 +61,5 @@ class ArticleList extends Component {
 }
 
 export default connect(state => ({
-    articles: state.articles
+    articles: state.selected
 }))(accordion(ArticleList))

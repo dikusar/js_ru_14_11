@@ -19,7 +19,10 @@ class App extends Component {
         const { articles, selected }=this.props
         const options = articles.map(article => ({
             label: article.title,
-            value: article.id
+            value: article.id,
+            text: article.text,
+            date: article.date,
+            comments: article.comments
         }))
         return (
             <div>

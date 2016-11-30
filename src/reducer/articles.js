@@ -1,5 +1,5 @@
 import { articles } from '../fixtures'
-import { DELETE_ARTICLE } from '../constants'
+import { DELETE_ARTICLE, SELECT_ARTICLE } from '../constants'
 
 export default (articlesState = articles, action) => {
     const { type, payload } = action
