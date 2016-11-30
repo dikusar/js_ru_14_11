@@ -38,19 +38,27 @@ class ArticleList extends Component {
         this.containerRef = ref
     }
 
-
-    render() {
-        const { articles, isOpen, toggleOpenItem } = this.props
+    getArticles(articles, props) {
+        const { isOpen, toggleOpenItem }=props
 
         const articleItems = articles.map(article => (
-            <li key = {article.value}>
-                <Article
-                    article = {article}
-                    isOpen = {isOpen(article.value)}
-                    toggleOpen = {toggleOpenItem(article.value)}
-                />
-            </li>
-        ))
+                <li key = {article.id}>
+                    <Article
+                        article = {article}
+                        isOpen = {isOpen(article.id)}
+                        toggleOpen = {toggleOpenItem(article.id)}
+                    />
+                </li>
+            ))
+        return articleItems
+    }
+
+
+    render() {
+        const props = this.props
+        const { articles, selectedArticles }=props
+        const articleItems = selectedArticles.length ? this.getArticles(selectedArticles, props) : this.getArticles(articles, props)
+        
 
         return (
             <ul ref = {this.getContainerRef}>
@@ -61,5 +69,6 @@ class ArticleList extends Component {
 }
 
 export default connect(state => ({
-    articles: state.selected
+    articles: state.articles,
+    selectedArticles: state.selected
 }))(accordion(ArticleList))

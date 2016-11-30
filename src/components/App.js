@@ -17,21 +17,16 @@ class App extends Component {
 
     render() {
         const { articles, selected }=this.props
-        const options = articles.map(article => ({
-            label: article.title,
-            value: article.id,
-            text: article.text,
-            date: article.date,
-            comments: article.comments
-        }))
         return (
             <div>
                 <Counter />
                 <Chart />
                 <DateRange />
                 <ArticleList />
-                <Select 
-                    options = {options}
+                <Select
+                    labelKey= 'title'
+                    valueKey = 'id'
+                    options = {articles}
                     value = {selected}
                     onChange = {this.handleChange}
                     multi = {true}/>
