@@ -1,7 +1,7 @@
 import { SELECT_ARTICLE, DELETE_ARTICLE, ADD_RANGE } from '../constants'
 import { articles } from '../fixtures'
 import { DateUtils } from 'react-day-picker'
-
+//не стоит сюда примешивать сразу и логику фильтрации, просто сохраняй значения фильтров
 let dateRange = {from: null, to: null}
 export default (selectedState = [], action) => {
     const { type, payload }=action
