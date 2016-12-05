@@ -1,47 +1,21 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import ArticleList from './ArticleList'
-import Select from 'react-select'
 import Chart from './Chart'
-import DateRange from './DateRange'
+import Filters from './Filters'
 import Counter from './Counter'
-import { selectArticle } from '../AC/select'
-
 import 'react-select/dist/react-select.css'
 
 class App extends Component {
-
-    // state = {
-    //     selected: null
-    // }
-
     render() {
-        const { articles, selected }=this.props
         return (
             <div>
                 <Counter />
                 <Chart />
-                <DateRange />
+                <Filters />
                 <ArticleList />
-                <Select
-                    labelKey= 'title'
-                    valueKey = 'id'
-                    options = {articles}
-                    value = {selected}
-                    onChange = {this.handleChange}
-                    multi = {true}/>
             </div>
         )
     }
-
-    handleChange = selected => {
-        // this.setState({ selected })
-        const { selectArticle }=this.props
-        selectArticle(selected)
-    }
 }
 
-export default connect(state => ({
-    articles: state.articles,
-    selected: state.selected
-}), { selectArticle } )(App)
+export default App

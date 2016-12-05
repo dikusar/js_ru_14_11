@@ -1,36 +1,27 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import DayPicker, { DateUtils } from 'react-day-picker'
-import { addRange } from '../AC/daterange'
+import { connect } from 'react-redux'
+import { changeDateRange } from '../AC/filters'
 
-window.DayPicker = DayPicker
-
-import 'react-day-picker/lib/style.css'
+import 'react-day-picker/lib/style.css';
 
 class DateRange extends Component {
 
     handleDayClick = (e, day) => {
-        // this.setState(DateUtils.addDayToRange(day, this.state))
-        const { addRange }=this.props
-        addRange(day)
+        const { changeDateRange, range } = this.props
+        changeDateRange(DateUtils.addDayToRange(day, range))
     }
 
     render() {
-        const 
-            { range }=this.props,
-            { from, to }=range,
-            isFirstDay = !from && !to && <p>Please select the <strong>first day</strong>.</p>,
-            isLastDay = from && !to && <p>Please select the <strong>last day</strong>.</p>,
-            selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`;
+        const { from, to } = this.props.range;
+        const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
         return (
             <div className="date-range">
                 <DayPicker
                     ref="daypicker"
-                    selectedDays={ day => DateUtils.isDayInRange(day, range) }
+                    selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }
                     onDayClick={ this.handleDayClick }
                 />
-                {isFirstDay}
-                {isLastDay}
                 {selectedRange}
             </div>
         );
@@ -39,5 +30,5 @@ class DateRange extends Component {
 }
 
 export default connect(state => ({
-    range: state.range
-}) , { addRange })(DateRange)
+    range: state.filters.dateRange
+}), { changeDateRange })(DateRange)

@@ -4,11 +4,6 @@ import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
 
 class ArticleList extends Component {
-
-    static defaultProps = {
-        articles: []
-    }
-
     static propTypes = {
         articles: PropTypes.array.isRequired,
         //from accordion decorator
@@ -38,27 +33,19 @@ class ArticleList extends Component {
         this.containerRef = ref
     }
 
-    getArticles(articles, props) {
-        const { isOpen, toggleOpenItem }=props
-
-        const articleItems = articles.map(article => (
-                <li key = {article.id}>
-                    <Article
-                        article = {article}
-                        isOpen = {isOpen(article.id)}
-                        toggleOpen = {toggleOpenItem(article.id)}
-                    />
-                </li>
-            ))
-        return articleItems
-    }
-
 
     render() {
-        const props = this.props
-        const { articles, selectedArticles }=props
-        const articleItems = selectedArticles.length ? this.getArticles(selectedArticles, props) : this.getArticles(articles, props)
-        
+        const { articles, isOpen, toggleOpenItem } = this.props
+
+        const articleItems = articles.map(article => (
+            <li key = {article.id}>
+                <Article
+                    article = {article}
+                    isOpen = {isOpen(article.id)}
+                    toggleOpen = {toggleOpenItem(article.id)}
+                />
+            </li>
+        ))
 
         return (
             <ul ref = {this.getContainerRef}>
@@ -68,7 +55,18 @@ class ArticleList extends Component {
     }
 }
 
-export default connect(state => ({
-    articles: state.articles,
-    selectedArticles: state.selected
-}))(accordion(ArticleList))
+export default connect(state => {
+    const { articles, filters } = state
+    const selected = filters.selected
+    const { from, to } = filters.dateRange
+
+    const filteredArticles = articles.filter(article => {
+        const published = Date.parse(article.date)
+        return (!selected.length || selected.includes(article.id)) &&
+            (!from || !to || (published > from && published < to))
+    })
+    return {
+        articles: filteredArticles.toArray()
+    }
+})(accordion(ArticleList))
+
