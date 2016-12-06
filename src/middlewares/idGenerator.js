@@ -8,4 +8,8 @@ function getId (collection) {
 
 export default store => next => action => {
  //TODO: use getId function to generate id for some store property
+ // Example
+ // const { collection }=store.collection
+ // next(action)
+ // collection = [{id: getId(collection)}, ...collection]
 }
