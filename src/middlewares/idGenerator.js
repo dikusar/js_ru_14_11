@@ -1,15 +1,17 @@
-// import { Map } from 'immutable'
+import { Map } from 'immutable'
+import { ADD_COMMENT } from '../constants'
 
-function getId (collection) {
-	return collection.reduce( (maxId, collectionElement) => {
-		return Math.max(collectionElement.id, maxId)
-	}, -1 ) + 1
-}
+const getId = () =>  Math.floor( ( 1 + Math.random() ) * 0x10000) 
+
 
 export default store => next => action => {
- //TODO: use getId function to generate id for some store property
- // Example
- // const { collection }=store.collection
- // next(action)
- // collection = [{id: getId(collection)}, ...collection]
+    const { type }=action
+    switch (type) {
+        case ADD_COMMENT:
+            let { newComment }=action.payload
+            action.payload.newComment = Object.assign({}, newComment, {id: getId()})
+            next(action)
+        break
+
+    }
 }

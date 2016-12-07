@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import { addComment } from '../AC/comments'
+// import { connect } from 'react-redux'
+import store from '../store'
 
 class NewCommentForm extends Component {
     state = {
@@ -15,11 +18,13 @@ class NewCommentForm extends Component {
 
     handleSubmit = ev => {
         ev.preventDefault()
-        console.log('---', 'adding comment')
-        this.setState({
-            user: '',
-            text: ''
-        })
+        // console.log('---', 'adding comment')
+        // this.setState({
+        //     user: '',
+        //     text: ''
+        // })
+        const newComment = this.state
+        store.dispatch(addComment(newComment))
     }
 
     render() {
@@ -33,4 +38,5 @@ class NewCommentForm extends Component {
     }
 }
 
+// export default connect(null, { addComment })(NewCommentForm)
 export default NewCommentForm
