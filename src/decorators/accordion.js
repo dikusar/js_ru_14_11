@@ -1,11 +1,9 @@
 import React from 'react'
 
 export default (Component) => class AccordionDecorator extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            openItemId: false
-        }
+    
+    state = {
+        openItemId: null
     }
 
     componentWillReceiveProps() {
@@ -17,7 +15,12 @@ export default (Component) => class AccordionDecorator extends React.Component {
     }
 
     render() {
-        return <Component {...this.props} isOpen = {this.isOpen} toggleOpenItem = {this.toggleOpenItem}/>
+        return <Component 
+                    {...this.props}
+                    {...this.state}
+                    isOpen={this.isOpen}
+                    toggleOpenItem={this.toggleOpenItem}
+                />
     }
 
     isOpen = id => this.state.openItemId == id
@@ -25,7 +28,6 @@ export default (Component) => class AccordionDecorator extends React.Component {
     toggleOpenItem = id => ev => {
         this.setState({
             openItemId: this.state.openItemId == id ? null : id
-        })
+        }) 
     }
-
 }

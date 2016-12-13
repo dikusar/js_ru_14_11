@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default (Component) => class WrappedComponent extends React.Component {
+export default (Component) => class toggleOpenDec extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -9,7 +9,7 @@ export default (Component) => class WrappedComponent extends React.Component {
     }
 
     render() {
-        return <Component {...this.props} {...this.state} toggleOpen = {this.toggleOpen}/>
+        return <Component {...this.props} {...this.state} toggleOpen = {this.toggleOpen} />
     }
 
     toggleOpen = ev => {

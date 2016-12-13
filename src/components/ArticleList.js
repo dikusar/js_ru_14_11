@@ -58,3 +58,4 @@ export default connect(state => {
         loading: articles.loading
     }
 }, { loadAllArticles })(accordion(ArticleList))
+
