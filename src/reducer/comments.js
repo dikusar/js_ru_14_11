@@ -1,4 +1,4 @@
-import { ADD_COMMENT, LOAD_COMMENTS, SUCCESS } from '../constants'
+import { ADD_COMMENT, LOAD_COMMENTS, LOAD_COMMENTS_BY_LIMMIT, SUCCESS } from '../constants'
 import { arrayToMap, ReducerState } from '../utils'
 import { Record, Map } from 'immutable'
 
@@ -20,6 +20,9 @@ export default (comments = defaultState, action) => {
 
         case LOAD_COMMENTS + SUCCESS:
             return comments.mergeIn(['entities'], arrayToMap(response, CommentModel))
+
+        case LOAD_COMMENTS_BY_LIMMIT + SUCCESS:
+            return {noviyHren}
     }
 
     return comments

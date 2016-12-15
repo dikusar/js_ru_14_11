@@ -1,4 +1,4 @@
-import { ADD_COMMENT, LOAD_COMMENTS } from '../constants'
+import { ADD_COMMENT, LOAD_COMMENTS, LOAD_COMMENTS_BY_LIMMIT } from '../constants'
 
 export function addComment(comment, articleId) {
     return {
@@ -18,6 +18,23 @@ export function checkAndLoadComments(articleId) {
             type: LOAD_COMMENTS,
             payload: { articleId },
             callAPI: `/api/comment?article=${articleId}`
+        })
+    }
+}
+
+const querytParam = {
+    limit: 5,
+    offset: 0
+}
+
+export function loadComentsByLimit() {
+    return (dispatch) => {
+        dispatch({
+            type: LOAD_COMMENTS_BY_LIMMIT,
+            payload: {
+                querytParam
+            },
+            callAPI: '/api/comment'
         })
     }
 }
