@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addComment, checkAndLoadComments, loadComentsByLimit } from '../AC/comments'
+import { addComment, checkAndLoadComments } from '../AC/comments'
 import Comment from './Comment'
 import Loader from './Loader'
 import toggleOpen from '../decorators/toggleOpen'
@@ -21,9 +21,7 @@ class CommentList extends Component {
     }
 
     componentDidMount() {
-        // const { article, loadArticle, articleId } = this.props
-        // if (!article || !article.text) loadArticle(articleId)
-        this.props.loadComentsByLimit()
+        // this.props.loadComentsByLimit()
     }
 
 
@@ -59,4 +57,4 @@ class CommentList extends Component {
 
 export default connect((state, props) => ({
     // comments: (props.article.comments || []).map(id => state.comments.getIn(['entities', id]))
-}), { addComment, checkAndLoadComments, loadComentsByLimit })(toggleOpen(CommentList))
+}), { addComment, checkAndLoadComments })(toggleOpen(CommentList))

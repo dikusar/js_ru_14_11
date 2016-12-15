@@ -50,6 +50,7 @@ router.get('/comment', function (req, res, next) {
 
     var limit = Number(req.query.limit) || mocks.comments.length,
         offset = Number(req.query.offset) || 0;
+        debugger;
     res.json({
         total: mocks.comments.length,
         records: mocks.comments.slice(offset, limit + offset)

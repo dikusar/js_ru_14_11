@@ -22,12 +22,7 @@ export function checkAndLoadComments(articleId) {
     }
 }
 
-const querytParam = {
-    limit: 5,
-    offset: 0
-}
-
-export function loadComentsByLimit() {
+export function loadComentsByLimit(querytParam) {
     return (dispatch) => {
         dispatch({
             type: LOAD_COMMENTS_BY_LIMMIT,
