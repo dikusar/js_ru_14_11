@@ -1,12 +1,12 @@
 import React from 'react'
 import { Router, Route, browserHistory } from 'react-router'
+import React from 'react'
+import { Router, Route, browserHistory } from 'react-router'
 import Root from './RouteHandlers/Root'
 import ArticleRoot from './RouteHandlers/ArticleRoot'
 import Filters from './RouteHandlers/Filters'
 import Counter from './RouteHandlers/Counter'
 import ArticlePage from './RouteHandlers/ArticlePage'
-import CommentsRoute from './RouteHandlers/CommentsRoute'
-import CommentList from './components/CommentList'
 import NotFound from './RouteHandlers/NotFound'
 
 export default (
@@ -17,9 +17,6 @@ export default (
                 <Route path = ":id" component={ArticlePage} />
             </Route>
             <Route path = "/filters" component={Filters} />
-            <Route path = "/comments" component={CommentsRoute} >
-                <Route path = ":page" component={CommentList} />
-            </Route>
             <Route path = "*" component={NotFound} />
         </Route>
     </Router>

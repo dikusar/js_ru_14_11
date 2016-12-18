@@ -8,7 +8,7 @@ import NewCommentForm from './NewCommentForm'
 
 class CommentList extends Component {
     static propTypes = {
-        // article: PropTypes.object.isRequired,
+        article: PropTypes.object.isRequired,
         //from connect
         comments: PropTypes.array.isRequired,
         //from toggleOpen decorator
@@ -18,10 +18,6 @@ class CommentList extends Component {
 
     static defaultProps = {
         comments: []
-    }
-
-    componentDidMount() {
-        // this.props.loadComentsByLimit()
     }
 
 
@@ -46,15 +42,15 @@ class CommentList extends Component {
     }
 
     getBody() {
-        // const { article, comments, isOpen, addComment } = this.props
-        // const commentForm = <NewCommentForm articleId = {article.id} addComment = {addComment} />
-        // if (!isOpen || !comments.length) return <div>{commentForm}</div>
-        // if (!article.commentsLoaded || article.commentsLoading) return <Loader />
-        // const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
-        // return <div><ul>{commentItems}</ul>{commentForm}</div>
+        const { article, comments, isOpen, addComment } = this.props
+        const commentForm = <NewCommentForm articleId = {article.id} addComment = {addComment} />
+        if (!isOpen || !comments.length) return <div>{commentForm}</div>
+        if (!article.commentsLoaded || article.commentsLoading) return <Loader />
+        const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
+        return <div><ul>{commentItems}</ul>{commentForm}</div>
     }
 }
 
 export default connect((state, props) => ({
-    // comments: (props.article.comments || []).map(id => state.comments.getIn(['entities', id]))
+    comments: (props.article.comments || []).map(id => state.comments.getIn(['entities', id]))
 }), { addComment, checkAndLoadComments })(toggleOpen(CommentList))
