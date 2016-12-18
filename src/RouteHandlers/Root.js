@@ -7,7 +7,7 @@ import MenuItem from '../components/Menu/MenuItem'
 class Root extends Component {
     static propTypes = {
 
-    };
+    }
 
     state = {
         username: ''
