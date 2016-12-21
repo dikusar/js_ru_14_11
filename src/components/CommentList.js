@@ -5,6 +5,7 @@ import Comment from './Comment'
 import Loader from './Loader'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
+import LocalizedText from './LocalizedText'
 
 class CommentList extends Component {
     static propTypes = {
@@ -20,6 +21,12 @@ class CommentList extends Component {
         comments: []
     }
 
+    static contextTypes = {
+        router: PropTypes.object,
+        store: PropTypes.object,
+        username: PropTypes.string
+    }
+
 
     componentWillReceiveProps({ isOpen, checkAndLoadComments, article}) {
         if (isOpen && !this.props.isOpen) checkAndLoadComments(article.id)
@@ -28,6 +35,7 @@ class CommentList extends Component {
     render() {
         return (
             <div>
+                <h3><LocalizedText text="User" />: {this.context.username}</h3>
                 {this.getButton()}
                 {this.getBody()}
             </div>
@@ -37,8 +45,8 @@ class CommentList extends Component {
 
     getButton() {
         const { comments, isOpen, toggleOpen } = this.props
-        if ( !comments.length) return <span>No comments yet</span>
-        return <a href="#" onClick = {toggleOpen}>{isOpen ? 'hide' : 'show'} comments</a>
+        if ( !comments.length) return <span><LocalizedText text="No comments yet" /></span>
+        return <a href="#" onClick = {toggleOpen}><LocalizedText text={`${isOpen ? 'hide' : 'show'} comments`} /></a>
     }
 
     getBody() {
@@ -53,4 +61,8 @@ class CommentList extends Component {
 
 export default connect((state, props) => ({
     comments: (props.article.comments || []).map(id => state.comments.getIn(['entities', id]))
-}), { addComment, checkAndLoadComments })(toggleOpen(CommentList))
+}),
+    { addComment, checkAndLoadComments },
+    null,
+    {pure: false}
+)(toggleOpen(CommentList))
